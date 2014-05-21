@@ -8,13 +8,8 @@ namespace ctc
   class PacketInfo : virtual public DataStruct
   {
     public:
-      PacketInfo()
-      {
-      }
-
-      virtual ~PacketInfo()
-      {
-      }
+      PacketInfo();
+      virtual ~PacketInfo();
 
     private:
   };

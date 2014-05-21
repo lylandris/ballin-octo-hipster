@@ -9,10 +9,6 @@ namespace ctc
       virtual ~Object() = 0;
     private:
   };
-
-  Object::~Object()
-  {
-  }
 }
 
 #endif //__Object_hpp

@@ -15,10 +15,6 @@ namespace ctc
       virtual ~EventListener() = 0;
   };
 
-  EventListener::~EventListener()
-  {
-  }
-
   template <typename... Args> struct EventHandler
   {
     typedef void (EventListener::* BaseCallback)(Object*, Args...);

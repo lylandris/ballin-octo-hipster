@@ -1,6 +1,8 @@
 #ifndef __DataStruct_hpp
 #define __DataStruct_hpp
 
+#include "Object.hpp"
+
 namespace ctc
 {
   class DataStruct : virtual public Object
@@ -10,10 +12,6 @@ namespace ctc
 
     private:
   };
-
-  DataStruct::~DataStruct()
-  {
-  }
 }
 
 #endif //__DataStruct_hpp

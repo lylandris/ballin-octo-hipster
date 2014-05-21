@@ -2,8 +2,7 @@
 #include <typeinfo>
 
 #include "Event.hpp"
-#include "PktProc.hpp"
-#include "PacketInfo.hpp"
+#include "PacketProcess.hpp"
 
 using namespace ctc;
 
@@ -19,12 +18,13 @@ class ClockCore : public Object
     }
 };
 
-static ClockCore clkCore;
+ClockCore clkCore;
 
-  void
-DeleteEventHandler(PktProc& onePkt)
+void
+DeleteEventHandler(PacketProcess* onePkt)
 {
-  clkCore.onDoSomethingEvent -= EventHandlerFactory(onePkt, &PktProc::callback);
+  clkCore.onDoSomethingEvent -= EventHandlerFactory((*onePkt), &PacketProcess::OnEvent);
+  delete onePkt;
 }
 
 int main(int argc, char **argv)
@@ -34,6 +34,8 @@ int main(int argc, char **argv)
 
   double clockCoreTime = 0.0;
   double clockNetTime = 0.0;
+  
+  PacketProcess::RegisterCollectEvent(&DeleteEventHandler);
 
   while (true)
   {
@@ -44,14 +46,14 @@ int main(int argc, char **argv)
     else if (clockCoreTime > clockNetTime)
     {
       clockNetTime += clkNetInterval;
-      PktProc *onePkt = new PktProc(64);
-      clkCore.onDoSomethingEvent += EventHandlerFactory((*onePkt), &PktProc::callback);
+      PacketProcess *onePkt = new PacketProcess(64);
+      clkCore.onDoSomethingEvent += EventHandlerFactory((*onePkt), &PacketProcess::OnEvent);
     }
     else
     {
       clockCoreTime += clkCoreInterval;
       clkCore.doSomething();
-      DeleteEventHandler();
+      PacketProcess::Collect();
     }
   }
 
