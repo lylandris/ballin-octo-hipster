@@ -6,9 +6,13 @@ namespace ctc
   class Object
   {
     public:
-      //virtual ~Object() = 0;
+      virtual ~Object() = 0;
     private:
   };
+  
+  Object::~Object()
+  {
+  }
 }
 
 #endif //__Object_hpp

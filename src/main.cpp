@@ -1,44 +1,52 @@
 #include <iostream>
 #include <typeinfo>
 
-#include "TaskList.hpp"
 #include "Event.hpp"
+#include "PktProc.hpp"
+#include "PacketInfo.hpp"
 
 using namespace ctc;
 
-typedef Event<int, int> MyCustomEvent;
+typedef Event<> _ClockCore;
 
-class MyCustomClass : public Object
+class ClockCore : public Object
 {
   public:
-    MyCustomEvent onDoSomethingEvent;
+    _ClockCore onDoSomethingEvent;
     void doSomething()
     {
-      std::cout << "MyCustomClass::doSomething()\n";
-      onDoSomethingEvent(this, 2, 4);
+      onDoSomethingEvent(this);
     }
 };
 
 int main(int argc, char **argv)
 {
-  std::cout << "Hello, world!" << std::endl;
-  TaskList a("a"), a2("a2");
-  MyCustomClass c;
+  ClockCore clkCore;
 
-  c.onDoSomethingEvent += make_handler(a, &TaskList::callback);
-  std::cout << "Fire1:\n";
-  c.doSomething();
+  const double clkCoreInterval = ((double) 1.0) / 600000000;
+  const double clkNetInterval = ((double) 64) * 8 / 1000000000;
 
-  c.onDoSomethingEvent += make_handler(a2, &TaskList::callback);
-  std::cout << "Fire2:\n";
-  c.doSomething();
+  double clockCoreTime = 0.0;
+  double clockNetTime = 0.0;
 
-  c.onDoSomethingEvent -= make_handler(a, &TaskList::callback);
-  std::cout << "Fire3:\n";
-  c.doSomething();
-
-  std::cout << "Fire4:\n";
-  c.onDoSomethingEvent(NULL, 99, -42);
+  while (true)
+  {
+    if (clockCoreTime > 1.0 && clockNetTime > 1.0)
+    {
+      break;
+    }
+    else if (clockCoreTime > clockNetTime)
+    {
+      clockNetTime += clkNetInterval;
+      PktProc *onePkt = new PktProc(64);
+      clkCore.onDoSomethingEvent += EventHandlerFactory((*onePkt), &PktProc::callback);
+    }
+    else
+    {
+      clockCoreTime += clkCoreInterval;
+      clkCore.doSomething();
+    }
+  }
 
   return 0;
 }
