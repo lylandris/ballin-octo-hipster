@@ -1,6 +1,8 @@
 #ifndef __PktProc_hpp
 #define __PktProc_hpp
 
+#include <forward_list>
+
 #include "Object.hpp"
 #include "Process.hpp"
 #include "Packet.hpp"
@@ -11,8 +13,8 @@ namespace ctc
   class PktProc : public Process, public Packet
   {
     public:
-    typedef void (* OnPktProc)(PktProc& left, PacketInfo& pi);
-    PktProc(size_t len) : Packet(len)
+      typedef void (* OnPktProc)(PktProc& left, PacketInfo& pi);
+      PktProc(size_t len) : Packet(len)
     {
       _pktProcFuncList[PktProcType_MacRx]     = &PktProc::MacRx;
       _pktProcFuncList[PktProcType_NetRx]     = &PktProc::NetRx;
@@ -135,10 +137,39 @@ namespace ctc
           TestFunc(left);
         }
 
+      static std::vector<PktProc&> _gcList;
+      static CollectNoUse(PktProc& left)
+      {
+        _gcList.push_back(left);
+      }
+
     public:
+      typedef void (*CollectCallback)(PktProc& onePkt);
+      static CollectCallback _GcCallback;
+      static void RegisterCollectFunc(CollectCallback func)
+      {
+        _GcCallback = func;
+      }
+      static void Collect(void)
+      {
+        if (nullptr != _GcCallback)
+        {
+          for (PktProc& pkt : _gcList)
+          {
+            _GcCallback(pkt);
+          }
+        }
+
+        _gcList.clear();
+      }
+
       void callback(Object *sender)
       {
-        if ((this->_curType < PktProcType_Max) && (nullptr != _pktProcFuncList[this->_curType]))
+        if (this->_curType >= PktProcType_Max)
+        {
+          CollectNoUse(*this);
+        }
+        else if (nullptr != _pktProcFuncList[this->_curType])
         {
           (*_pktProcFuncList[this->_curType])((*this), (*(this->_arg)));
         }

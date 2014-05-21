@@ -7,9 +7,9 @@ namespace ctc
   {
     public:
       Packet(int len) : _pktLen(len)
-      {
-        _pkt = new char[_pktLen];
-      }
+    {
+      _pkt = new char[_pktLen];
+    }
       virtual ~Packet() = 0;
       void SetPacketByte(size_t pos, char byte)
       {
@@ -27,7 +27,7 @@ namespace ctc
       char *_pkt;
       size_t _pktLen;
   };
-  
+
   Packet::~Packet()
   {
   }

@@ -10,7 +10,7 @@ namespace ctc
 
     private:
   };
-  
+
   DataStruct::~DataStruct()
   {
   }

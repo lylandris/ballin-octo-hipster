@@ -19,10 +19,16 @@ class ClockCore : public Object
     }
 };
 
+static ClockCore clkCore;
+
+  void
+DeleteEventHandler(PktProc& onePkt)
+{
+  clkCore.onDoSomethingEvent -= EventHandlerFactory(onePkt, &PktProc::callback);
+}
+
 int main(int argc, char **argv)
 {
-  ClockCore clkCore;
-
   const double clkCoreInterval = ((double) 1.0) / 600000000;
   const double clkNetInterval = ((double) 64) * 8 / 1000000000;
 
@@ -45,6 +51,7 @@ int main(int argc, char **argv)
     {
       clockCoreTime += clkCoreInterval;
       clkCore.doSomething();
+      DeleteEventHandler();
     }
   }
 

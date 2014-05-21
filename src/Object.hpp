@@ -9,7 +9,7 @@ namespace ctc
       virtual ~Object() = 0;
     private:
   };
-  
+
   Object::~Object()
   {
   }

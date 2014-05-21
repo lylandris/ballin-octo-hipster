@@ -13,7 +13,7 @@ namespace ctc
       virtual ~Process() = 0;
       virtual void callback(Object *sender) = 0;
   };
-  
+
   Process::~Process()
   {
   }

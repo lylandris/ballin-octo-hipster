@@ -14,7 +14,7 @@ namespace ctc
     public:
       virtual ~EventListener() = 0;
   };
-  
+
   EventListener::~EventListener()
   {
   }
