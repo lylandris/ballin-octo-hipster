@@ -66,8 +66,6 @@ namespace ctc
       OnPktProc _pktProcFuncList[PktProcType_Max];
       PacketInfo *_arg;
 
-      void (*_toProc)(PktProc& left, PacketInfo& pi);
-
       static void
         MacRx(PktProc& left, PacketInfo& pi)
         {
@@ -140,9 +138,9 @@ namespace ctc
     public:
       void callback(Object *sender)
       {
-        if (nullptr != _toProc)
+        if ((this->_curType < PktProcType_Max) && (nullptr != _pktProcFuncList[this->_curType]))
         {
-          (*_toProc)((*this), (*(this->_arg)));
+          (*_pktProcFuncList[this->_curType])((*this), (*(this->_arg)));
         }
       }
   };
