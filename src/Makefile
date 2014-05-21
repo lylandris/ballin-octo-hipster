@@ -235,10 +235,10 @@ endif
 endif
 
 clean:
-	$(RM) $(OBJS) $(PROGRAM) $(PROGRAM).exe
+	$(RM) $(OBJS) $(PROGRAM)
 
 distclean: clean
-	$(RM) $(DEPS) TAGS
+	$(RM) $(DEPS) $(TAGS)
 
 # Show help.
 help:
