@@ -108,6 +108,8 @@ ETAGSFLAGS =
 CTAGS = ctags
 CTAGSFLAGS =
 
+TAGS = tags TAGS
+
 ## Stable Section: usually no need to be changed. But you can add more.
 ##==========================================================================
 SHELL   = /bin/sh
