@@ -1,4 +1,4 @@
-#include "PacketInfo.hpp"
+#include "PacketInfo.h"
 
 using namespace ctc;
 

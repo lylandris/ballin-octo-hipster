@@ -1,7 +1,7 @@
-#ifndef __DataStruct_hpp
-#define __DataStruct_hpp
+#ifndef __DataStruct_h
+#define __DataStruct_h
 
-#include "Object.hpp"
+#include "Object.h"
 
 namespace ctc
 {
@@ -14,4 +14,4 @@ namespace ctc
   };
 }
 
-#endif //__DataStruct_hpp
+#endif //__DataStruct_h

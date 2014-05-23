@@ -1,8 +1,8 @@
 #include <iostream>
 #include <typeinfo>
 
-#include "Event.hpp"
-#include "PacketProcess.hpp"
+#include "Event.h"
+#include "PacketProcess.h"
 
 using namespace ctc;
 

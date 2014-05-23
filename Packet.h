@@ -1,7 +1,7 @@
-#ifndef __Packet_hpp
-#define __Packet_hpp
+#ifndef __Packet_h
+#define __Packet_h
 
-#include "Object.hpp"
+#include "Object.h"
 
 namespace ctc
 {
@@ -19,4 +19,4 @@ namespace ctc
   };
 }
 
-#endif //__Packet_hpp
+#endif //__Packet_h

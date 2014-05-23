@@ -1,7 +1,7 @@
-#ifndef __PacketInfo_hpp
-#define __PacketInfo_hpp
+#ifndef __PacketInfo_h
+#define __PacketInfo_h
 
-#include "DataStruct.hpp"
+#include "DataStruct.h"
 
 namespace ctc
 {
@@ -15,4 +15,4 @@ namespace ctc
   };
 }
 
-#endif //__PacketInfo_hpp
+#endif //__PacketInfo_h

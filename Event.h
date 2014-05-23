@@ -1,11 +1,11 @@
-#ifndef __Event_hpp
-#define __Event_hpp
+#ifndef __Event_h
+#define __Event_h
 
 #include <vector>
 #include <typeinfo>
 #include <algorithm>
 
-#include "Object.hpp"
+#include "Object.h"
 
 namespace ctc
 {
@@ -61,4 +61,4 @@ namespace ctc
   };
 }
 
-#endif //__Event_hpp
+#endif //__Event_h

@@ -1,8 +1,8 @@
-#ifndef __Process_hpp
-#define __Process_hpp
+#ifndef __Process_h
+#define __Process_h
 
-#include "Object.hpp"
-#include "Event.hpp"
+#include "Object.h"
+#include "Event.h"
 
 namespace ctc
 {
@@ -14,4 +14,4 @@ namespace ctc
   };
 }
 
-#endif //__Process_hpp
+#endif //__Process_h

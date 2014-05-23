@@ -1,4 +1,4 @@
-#include "DataStruct.hpp"
+#include "DataStruct.h"
 
 using namespace ctc;
 

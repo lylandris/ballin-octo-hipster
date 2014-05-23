@@ -1,12 +1,12 @@
-#ifndef __PacketProcess_hpp
-#define __PacketProcess_hpp
+#ifndef __PacketProcess_h
+#define __PacketProcess_h
 
 #include <vector>
 
-#include "Object.hpp"
-#include "Process.hpp"
-#include "Packet.hpp"
-#include "PacketInfo.hpp"
+#include "Object.h"
+#include "Process.h"
+#include "Packet.h"
+#include "PacketInfo.h"
 
 namespace ctc
 {
@@ -65,4 +65,4 @@ namespace ctc
   };
 }
 
-#endif //__PacketProcess_hpp
+#endif //__PacketProcess_h
